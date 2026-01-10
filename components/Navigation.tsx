@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Menu, X, GraduationCap, Sun, Moon } from 'lucide-react';
-import { NAV_ITEMS, SCHOOL_NAME } from '../constants';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { NAV_ITEMS, SCHOOL_NAME, SCHOOL_LOGO_URL } from '../constants';
 import { Page } from '../types';
 
 interface NavigationProps {
@@ -27,8 +27,16 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate, isDark
             className="flex items-center gap-2 cursor-pointer" 
             onClick={() => handleNavClick(Page.HOME)}
           >
-            <div className="bg-blue-900 dark:bg-blue-600 text-white p-1.5 rounded-lg transition-colors">
-              <GraduationCap size={24} />
+            <div className="flex items-center justify-center transition-transform hover:scale-105">
+              <img 
+                src={SCHOOL_LOGO_URL} 
+                alt={`${SCHOOL_NAME} Logo`} 
+                className="h-10 w-auto object-contain"
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
             </div>
             <span className="font-bold text-xl text-blue-900 dark:text-white tracking-tight transition-colors">{SCHOOL_NAME}</span>
           </div>

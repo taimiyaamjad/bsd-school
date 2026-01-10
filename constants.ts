@@ -1,6 +1,7 @@
 import { NavItem, Page, SchoolStat } from './types';
 
 export const SCHOOL_NAME = "BSD Public School";
+export const SCHOOL_LOGO_URL = "https://bsdpublic.wordpress.com/wp-content/uploads/2024/12/cropped-1000001464-removebg-preview-1.png";
 export const SCHOOL_ADDRESS = "123 Education Lane, Knowledge City, ST 54321";
 export const SCHOOL_PHONE = "+1 (555) 123-4567";
 export const SCHOOL_EMAIL = "admissions@bsdpublicschool.edu";
