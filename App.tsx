@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Determine initial theme
+    // Immediate dark mode sync
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setIsDarkMode(prefersDark);
     setIsLoaded(true);
@@ -49,10 +49,11 @@ const App: React.FC = () => {
     }
   };
 
-  if (!isLoaded) return <div className="min-h-screen bg-slate-950" />;
+  // Prevent flash during hydration
+  if (!isLoaded) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-gray-900 dark:text-gray-100 font-sans flex flex-col transition-colors duration-700">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans flex flex-col selection:bg-blue-200 dark:selection:bg-blue-800 transition-colors duration-500">
       <Navigation 
         currentPage={currentPage} 
         onNavigate={setCurrentPage} 
@@ -60,46 +61,61 @@ const App: React.FC = () => {
         toggleTheme={toggleTheme}
       />
       
-      <motion.main 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="flex-grow relative z-10"
-      >
-        {renderPage()}
-      </motion.main>
+      <main className="flex-grow relative overflow-x-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -10 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            {renderPage()}
+          </motion.div>
+        </AnimatePresence>
+      </main>
 
-      <footer className="bg-slate-900 dark:bg-black text-slate-300 py-12 border-t border-slate-800 dark:border-slate-900 relative z-20">
+      <footer className="bg-slate-900 dark:bg-slate-950 text-slate-400 py-16 border-t border-slate-800 dark:border-slate-900 relative z-20">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-12">
             <div className="col-span-1 md:col-span-2">
-              <h2 className="text-2xl font-bold text-white mb-4">{SCHOOL_NAME}</h2>
-              <p className="max-w-sm text-sm leading-relaxed text-slate-400">
-                Nurturing the leaders of tomorrow through excellence in education, 
-                character building, and holistic development.
+              <h2 className="text-3xl font-black text-white mb-6 tracking-tight">{SCHOOL_NAME}</h2>
+              <p className="max-w-sm text-base leading-relaxed mb-8">
+                Providing a world-class education that inspires creativity, 
+                critical thinking, and global citizenship since 1999.
               </p>
+              <div className="flex gap-4">
+                 {[1,2,3,4].map(i => (
+                   <div key={i} className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 transition-colors cursor-pointer" />
+                 ))}
+              </div>
             </div>
             <div>
-              <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-sm">
-                <li><button onClick={() => setCurrentPage(Page.ABOUT)} className="hover:text-white transition-colors">About Us</button></li>
-                <li><button onClick={() => setCurrentPage(Page.ACADEMICS)} className="hover:text-white transition-colors">Academics</button></li>
-                <li><button onClick={() => setCurrentPage(Page.ADMISSIONS)} className="hover:text-white transition-colors">Admissions</button></li>
-                <li><button onClick={() => setCurrentPage(Page.CONTACT)} className="hover:text-white transition-colors">Contact</button></li>
+              <h3 className="text-white font-bold mb-6 text-lg">Navigation</h3>
+              <ul className="space-y-4">
+                {['About Us', 'Academics', 'Admissions', 'Contact'].map((item) => (
+                  <li key={item}>
+                    <button 
+                      onClick={() => setCurrentPage(item.toUpperCase().split(' ')[0] as Page)} 
+                      className="hover:text-blue-400 transition-colors text-sm font-medium"
+                    >
+                      {item}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
              <div>
-              <h3 className="text-white font-semibold mb-4">Connect</h3>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li className="hover:text-white cursor-pointer transition-colors">Facebook</li>
-                <li className="hover:text-white cursor-pointer transition-colors">Twitter</li>
-                <li className="hover:text-white cursor-pointer transition-colors">Instagram</li>
-                <li className="hover:text-white cursor-pointer transition-colors">LinkedIn</li>
-              </ul>
+              <h3 className="text-white font-bold mb-6 text-lg">Contact Us</h3>
+              <div className="space-y-4 text-sm">
+                <p>123 Knowledge Way,<br/>New Delhi, India 110001</p>
+                <p className="text-blue-400 font-bold underline">info@bsdpublic.edu</p>
+                <p>+91 (011) 2345-6789</p>
+              </div>
             </div>
           </div>
-          <div className="border-t border-slate-800 dark:border-slate-900 mt-12 pt-8 text-center text-xs text-slate-500">
-            © {new Date().getFullYear()} {SCHOOL_NAME}. All rights reserved.
+          <div className="border-t border-slate-800 dark:border-slate-900 mt-16 pt-8 text-center text-xs text-slate-600 tracking-widest uppercase font-bold">
+            &copy; {new Date().getFullYear()} BSD Public School. Crafted for Excellence.
           </div>
         </div>
       </footer>
