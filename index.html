@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-slate-50 dark:bg-slate-950">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BSD Public School</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      // Immediate theme check to prevent flash
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+      
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              // Custom colors if needed
+              // Custom colors
             }
           }
         }
@@ -21,7 +26,8 @@
     <style>
       body {
         font-family: 'Inter', sans-serif;
-        background-color: #f8fafc;
+        margin: 0;
+        padding: 0;
       }
       .dark body {
         background-color: #020617;
@@ -49,6 +55,9 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #1e40af;
       }
+      #root {
+        min-height: 100vh;
+      }
     </style>
   <script type="importmap">
 {
@@ -66,7 +75,7 @@
 }
 </script>
 </head>
-  <body>
+  <body class="bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
     <div id="root"></div>
   </body>
 </html>
