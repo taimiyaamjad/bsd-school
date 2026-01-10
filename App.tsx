@@ -41,7 +41,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen text-gray-900 dark:text-gray-100 font-sans flex flex-col transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-gray-900 dark:text-gray-100 font-sans flex flex-col transition-colors duration-500">
       <Navigation 
         currentPage={currentPage} 
         onNavigate={setCurrentPage} 
@@ -49,12 +49,12 @@ const App: React.FC = () => {
         toggleTheme={toggleTheme}
       />
       
-      <main className="flex-grow relative">
+      <main className="flex-grow relative z-10">
         {renderPage()}
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 dark:bg-black text-slate-300 py-12 border-t border-slate-800 dark:border-slate-900 relative z-10">
+      <footer className="bg-slate-900 dark:bg-black text-slate-300 py-12 border-t border-slate-800 dark:border-slate-900 relative z-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">

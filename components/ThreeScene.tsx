@@ -73,7 +73,7 @@ const MathParticles: React.FC<MathParticleProps> = ({ isDarkMode, count = 120 })
           key={i}
           position={[p.assembled.x, p.assembled.y, p.assembled.z]}
           fontSize={p.scale}
-          color={isDarkMode ? "#06b6d4" : "#1e40af"} 
+          color={isDarkMode ? "#22d3ee" : "#1e40af"} 
           anchorX="center"
           anchorY="middle"
           fillOpacity={isDarkMode ? 0.8 : 0.6}
@@ -88,28 +88,18 @@ const MathParticles: React.FC<MathParticleProps> = ({ isDarkMode, count = 120 })
 const ThreeScene = ({ isDarkMode }: { isDarkMode?: boolean }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
-      {/* 
-          We use a div that strictly follows the root theme to prevent flashes.
-          The backdrop matches the index.html background.
-      */}
-      <div className={`absolute inset-0 transition-colors duration-1000 ease-in-out ${
-        isDarkMode 
-        ? 'bg-slate-950' 
-        : 'bg-slate-50'
-      }`} />
-
       <Canvas 
         camera={{ position: [0, 0, 15], fov: 40 }} 
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
         onCreated={({ gl }) => {
-          gl.setClearColor(0x000000, 0); // Transparent canvas background
+          gl.setClearColor(0x000000, 0); 
         }}
       >
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
+        <ambientLight intensity={1.5} />
+        <pointLight position={[10, 10, 10]} intensity={2} />
         <MathParticles isDarkMode={!!isDarkMode} />
-        <Environment preset={isDarkMode ? "night" : "warehouse"} />
+        <Environment preset={isDarkMode ? "night" : "city"} />
       </Canvas>
     </div>
   );
