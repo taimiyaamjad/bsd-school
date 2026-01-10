@@ -16,14 +16,14 @@ interface MathParticleProps {
   count?: number;
 }
 
-const MathParticles: React.FC<MathParticleProps> = ({ isDarkMode, count = 120 }) => {
+const MathParticles: React.FC<MathParticleProps> = ({ isDarkMode, count = 100 }) => {
   const group = useRef<THREE.Group>(null);
   
   const particles = useMemo(() => {
     return new Array(count).fill(0).map(() => {
       const symbol = MATH_ITEMS[Math.floor(Math.random() * MATH_ITEMS.length)];
       
-      const r = 3.5 * Math.pow(Math.random(), 0.5); 
+      const r = 4 * Math.pow(Math.random(), 0.5); 
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
       
@@ -31,16 +31,16 @@ const MathParticles: React.FC<MathParticleProps> = ({ isDarkMode, count = 120 })
       const y = r * Math.sin(phi) * Math.sin(theta);
       const z = r * Math.cos(phi);
       
-      const spread = 6 + Math.random() * 8; 
+      const spread = 8 + Math.random() * 10; 
       const ex = x * spread; 
       const ey = y * spread;
-      const ez = z * spread + 8; 
+      const ez = z * spread + 10; 
 
       return {
         symbol,
         assembled: new THREE.Vector3(x, y, z),
         exploded: new THREE.Vector3(ex, ey, ez),
-        scale: (symbol.length > 2 ? 0.6 : 1.0) * (0.6 + Math.random() * 0.4),
+        scale: (symbol.length > 2 ? 0.5 : 0.8) * (0.6 + Math.random() * 0.4),
         rotation: [Math.random() * Math.PI, Math.random() * Math.PI, 0] as [number, number, number],
       };
     });
@@ -50,18 +50,17 @@ const MathParticles: React.FC<MathParticleProps> = ({ isDarkMode, count = 120 })
     if (!group.current) return;
 
     const scrollY = window.scrollY;
-    const maxScroll = window.innerHeight * 5.0; 
+    const maxScroll = window.innerHeight * 4.0; 
     const progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
-    const ease = 1 - Math.pow(1 - progress, 2); 
+    const ease = 1 - Math.pow(1 - progress, 3); 
 
     group.current.children.forEach((child, i) => {
       const p = particles[i];
       if (child instanceof THREE.Mesh) {
         child.position.lerpVectors(p.assembled, p.exploded, ease);
         const t = state.clock.elapsedTime;
-        child.rotation.x = p.rotation[0] + t * 0.05;
-        child.rotation.y = p.rotation[1] + t * 0.05;
-        child.position.y += Math.sin(t * 0.5 + p.assembled.x) * 0.002;
+        child.rotation.x = p.rotation[0] + t * 0.1;
+        child.rotation.y = p.rotation[1] + t * 0.1;
       }
     });
   });
@@ -76,7 +75,7 @@ const MathParticles: React.FC<MathParticleProps> = ({ isDarkMode, count = 120 })
           color={isDarkMode ? "#22d3ee" : "#1e40af"} 
           anchorX="center"
           anchorY="middle"
-          fillOpacity={isDarkMode ? 0.8 : 0.6}
+          fillOpacity={isDarkMode ? 0.7 : 0.5}
         >
           {p.symbol}
         </Text>
@@ -87,19 +86,22 @@ const MathParticles: React.FC<MathParticleProps> = ({ isDarkMode, count = 120 })
 
 const ThreeScene = ({ isDarkMode }: { isDarkMode?: boolean }) => {
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
+    <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none bg-transparent">
       <Canvas 
-        camera={{ position: [0, 0, 15], fov: 40 }} 
+        camera={{ position: [0, 0, 15], fov: 45 }} 
         dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ 
+          antialias: true, 
+          alpha: true,
+          powerPreference: "high-performance"
+        }}
         onCreated={({ gl }) => {
-          gl.setClearColor(0x000000, 0); 
+          gl.setClearColor(0x000000, 0); // Absolute transparency
         }}
       >
         <ambientLight intensity={1.5} />
         <pointLight position={[10, 10, 10]} intensity={2} />
         <MathParticles isDarkMode={!!isDarkMode} />
-        <Environment preset={isDarkMode ? "night" : "city"} />
       </Canvas>
     </div>
   );

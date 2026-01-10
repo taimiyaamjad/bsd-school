@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-slate-50 dark:bg-slate-950">
+<html lang="en" style="background-color: #020617;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BSD Public School</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Immediate theme check to prevent flash
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.classList.add('dark');
-      }
+      // Force the background color immediately before any script runs
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', isDark);
+      document.documentElement.style.backgroundColor = isDark ? '#020617' : '#f8fafc';
       
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              // Custom colors
+              brand: {
+                900: '#1e3a8a',
+                800: '#1e40af'
+              }
             }
           }
         }
@@ -28,32 +31,13 @@
         font-family: 'Inter', sans-serif;
         margin: 0;
         padding: 0;
+        background-color: transparent;
       }
       .dark body {
         background-color: #020617;
       }
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Playfair Display', serif;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      .dark ::-webkit-scrollbar-track {
-        background: #0f172a;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #1e3a8a;
-        border-radius: 4px;
-      }
-      .dark ::-webkit-scrollbar-thumb {
-        background: #3b82f6;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #1e40af;
       }
       #root {
         min-height: 100vh;

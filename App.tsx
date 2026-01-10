@@ -8,10 +8,19 @@ import Contact from './pages/Contact';
 import ChatBot from './components/ChatBot';
 import { Page } from './types';
 import { SCHOOL_NAME } from './constants';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.HOME);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Determine initial theme
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setIsDarkMode(prefersDark);
+    setIsLoaded(true);
+  }, []);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -40,8 +49,10 @@ const App: React.FC = () => {
     }
   };
 
+  if (!isLoaded) return <div className="min-h-screen bg-slate-950" />;
+
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-gray-900 dark:text-gray-100 font-sans flex flex-col transition-colors duration-500">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-gray-900 dark:text-gray-100 font-sans flex flex-col transition-colors duration-700">
       <Navigation 
         currentPage={currentPage} 
         onNavigate={setCurrentPage} 
@@ -49,11 +60,15 @@ const App: React.FC = () => {
         toggleTheme={toggleTheme}
       />
       
-      <main className="flex-grow relative z-10">
+      <motion.main 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="flex-grow relative z-10"
+      >
         {renderPage()}
-      </main>
+      </motion.main>
 
-      {/* Footer */}
       <footer className="bg-slate-900 dark:bg-black text-slate-300 py-12 border-t border-slate-800 dark:border-slate-900 relative z-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
@@ -75,11 +90,11 @@ const App: React.FC = () => {
             </div>
              <div>
               <h3 className="text-white font-semibold mb-4">Connect</h3>
-              <ul className="space-y-2 text-sm">
-                <li className="hover:text-white cursor-pointer">Facebook</li>
-                <li className="hover:text-white cursor-pointer">Twitter</li>
-                <li className="hover:text-white cursor-pointer">Instagram</li>
-                <li className="hover:text-white cursor-pointer">LinkedIn</li>
+              <ul className="space-y-2 text-sm text-slate-400">
+                <li className="hover:text-white cursor-pointer transition-colors">Facebook</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Twitter</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Instagram</li>
+                <li className="hover:text-white cursor-pointer transition-colors">LinkedIn</li>
               </ul>
             </div>
           </div>
