@@ -14,7 +14,7 @@ const KnowledgeBackground: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) 
   ];
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden overflow-y-hidden">
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
       {/* Animated Orbs */}
       {shapes.map((shape, i) => (
         <motion.div
@@ -31,27 +31,27 @@ const KnowledgeBackground: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) 
       <div className="absolute inset-0 opacity-[0.15] dark:opacity-[0.07]" 
            style={{ backgroundImage: 'radial-gradient(#1e3a8a 0.5px, transparent 0.5px)', backgroundSize: '30px 30px' }} />
       
-      {/* Subtle Floating Icons (CSS only) */}
+      {/* Subtle Floating Icons */}
       <div className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
             initial={{ 
-              x: Math.random() * 100 + 'vw', 
-              y: Math.random() * 100 + 'vh',
+              x: (i * 10) + 'vw', 
+              y: '110vh',
               opacity: 0 
             }}
             animate={{ 
-              y: [null, '-20vh'],
-              opacity: [0, 0.3, 0]
+              y: '-10vh',
+              opacity: [0, 0.2, 0]
             }}
             transition={{ 
-              duration: 10 + Math.random() * 20, 
+              duration: 15 + Math.random() * 15, 
               repeat: Infinity, 
               ease: "linear",
-              delay: Math.random() * 10
+              delay: i * 2
             }}
-            className="absolute text-blue-900/20 dark:text-cyan-400/20 font-serif text-2xl select-none"
+            className="absolute text-blue-900/20 dark:text-cyan-400/20 font-serif text-2xl"
           >
             {['α', 'Σ', '∫', 'π', 'Ω', '√', 'Δ'][i % 7]}
           </motion.div>

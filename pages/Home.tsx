@@ -12,8 +12,8 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ onNavigate, isDarkMode }) => {
   return (
-    <div className="relative min-h-screen">
-      {/* Background Component */}
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background Component - Using the stable Framer Motion version */}
       <KnowledgeBackground isDarkMode={!!isDarkMode} />
       
       <div className="container mx-auto px-4 pt-32 pb-16 relative z-10">
@@ -106,7 +106,11 @@ const Home: React.FC<HomeProps> = ({ onNavigate, isDarkMode }) => {
                 whileHover={{ y: -10 }}
                 className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-10 rounded-[2rem] shadow-xl border border-slate-100 dark:border-slate-800 group"
               >
-                <div className={`w-14 h-14 bg-${feature.color}-100 dark:bg-${feature.color}-900/30 text-${feature.color}-600 dark:text-${feature.color}-400 rounded-2xl flex items-center justify-center mb-8 group-hover:rotate-12 transition-transform`}>
+                <div className={`w-14 h-14 flex items-center justify-center mb-8 group-hover:rotate-12 transition-transform rounded-2xl ${
+                  feature.color === 'blue' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' :
+                  feature.color === 'green' ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' :
+                  'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400'
+                }`}>
                     {React.cloneElement(feature.icon as React.ReactElement, { size: 28 })}
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">{feature.title}</h3>
