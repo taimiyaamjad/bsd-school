@@ -5,6 +5,7 @@ import About from './pages/About';
 import Academics from './pages/Academics';
 import Admissions from './pages/Admissions';
 import Contact from './pages/Contact';
+import StaffLogin from './pages/StaffLogin';
 import ChatBot from './components/ChatBot';
 import { Page } from './types';
 import { SCHOOL_NAME, DIGITAL_PORTAL_URL, SCHOOL_ADDRESS, SCHOOL_EMAIL, SCHOOL_PHONE } from './constants';
@@ -43,6 +44,8 @@ const App: React.FC = () => {
         return <Admissions />;
       case Page.CONTACT:
         return <Contact />;
+      case Page.STAFF_LOGIN:
+        return <StaffLogin />;
       default:
         return <Home onNavigate={setCurrentPage} isDarkMode={isDarkMode} />;
     }
@@ -94,6 +97,7 @@ const App: React.FC = () => {
                 <li><button onClick={() => setCurrentPage(Page.ABOUT)} className="hover:text-blue-400 transition-colors text-sm">About Our History</button></li>
                 <li><button onClick={() => setCurrentPage(Page.ACADEMICS)} className="hover:text-blue-400 transition-colors text-sm">Our Faculty</button></li>
                 <li><button onClick={() => setCurrentPage(Page.ADMISSIONS)} className="hover:text-blue-400 transition-colors text-sm">Admission Inquiry</button></li>
+                <li><button onClick={() => setCurrentPage(Page.STAFF_LOGIN)} className="hover:text-blue-400 transition-colors text-sm font-bold">Staff Access</button></li>
               </ul>
             </div>
              <div>

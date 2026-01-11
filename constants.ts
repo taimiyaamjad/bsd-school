@@ -13,7 +13,8 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Academics', page: Page.ACADEMICS },
   { label: 'Admissions', page: Page.ADMISSIONS },
   { label: 'Contact', page: Page.CONTACT },
-  { label: 'Digital Portal', page: 'PORTAL' as any }, // Added portal as an external navigation item
+  { label: 'Staff Login', page: Page.STAFF_LOGIN },
+  { label: 'Digital Portal', page: 'PORTAL' as any },
 ];
 
 export const SCHOOL_STATS: SchoolStat[] = [
