@@ -1,7 +1,2 @@
-import React from 'react';
-
-const ThreeScene = () => {
-  return null;
-};
-
-export default ThreeScene;
+// This file is deprecated and intentionally left empty.
+export default function ThreeScene() { return null; }

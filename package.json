@@ -1,5 +1,5 @@
 {
-  "name": "bsd-public-school-3d",
+  "name": "bsd-public-school-digital",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,10 +13,7 @@
     "framer-motion": "^12.25.0",
     "react-dom": "^19.2.3",
     "@google/genai": "^1.35.0",
-    "react": "^19.2.3",
-    "three": "^0.182.0",
-    "@react-three/fiber": "^9.5.0",
-    "@react-three/drei": "^10.7.7"
+    "react": "^19.2.3"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

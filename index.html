@@ -42,6 +42,14 @@
       #root {
         min-height: 100vh;
       }
+      /* Smooth fade in for the whole app */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      #root {
+        animation: fadeIn 0.5s ease-in;
+      }
     </style>
   <script type="importmap">
 {
@@ -51,10 +59,7 @@
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "three": "https://esm.sh/three@^0.182.0",
-    "@react-three/fiber": "https://esm.sh/@react-three/fiber@^9.5.0",
-    "@react-three/drei": "https://esm.sh/@react-three/drei@^10.7.7"
+    "react": "https://esm.sh/react@^19.2.3"
   }
 }
 </script>
