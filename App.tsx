@@ -7,7 +7,7 @@ import Admissions from './pages/Admissions';
 import Contact from './pages/Contact';
 import ChatBot from './components/ChatBot';
 import { Page } from './types';
-import { SCHOOL_NAME } from './constants';
+import { SCHOOL_NAME, DIGITAL_PORTAL_URL, SCHOOL_ADDRESS, SCHOOL_EMAIL, SCHOOL_PHONE } from './constants';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const App: React.FC = () => {
@@ -16,7 +16,6 @@ const App: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Immediate dark mode sync
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setIsDarkMode(prefersDark);
     setIsLoaded(true);
@@ -49,7 +48,6 @@ const App: React.FC = () => {
     }
   };
 
-  // Prevent flash during hydration
   if (!isLoaded) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />;
 
   return (
@@ -81,41 +79,35 @@ const App: React.FC = () => {
             <div className="col-span-1 md:col-span-2">
               <h2 className="text-3xl font-black text-white mb-6 tracking-tight">{SCHOOL_NAME}</h2>
               <p className="max-w-sm text-base leading-relaxed mb-8">
-                Providing a world-class education that inspires creativity, 
-                critical thinking, and global citizenship since 1999.
+                Nurturing leaders since 2017. Affiliated with CBSE, 
+                blending tradition with innovation in Guraini, Jaunpur.
               </p>
               <div className="flex gap-4">
-                 {[1,2,3,4].map(i => (
-                   <div key={i} className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 transition-colors cursor-pointer" />
-                 ))}
+                <a href={DIGITAL_PORTAL_URL} target="_blank" rel="noreferrer" className="px-6 py-2 bg-blue-600 text-white rounded-full text-sm font-bold hover:bg-blue-700 transition-colors">
+                  Open Digital Portal
+                </a>
               </div>
             </div>
             <div>
-              <h3 className="text-white font-bold mb-6 text-lg">Navigation</h3>
+              <h3 className="text-white font-bold mb-6 text-lg">Quick Access</h3>
               <ul className="space-y-4">
-                {['About Us', 'Academics', 'Admissions', 'Contact'].map((item) => (
-                  <li key={item}>
-                    <button 
-                      onClick={() => setCurrentPage(item.toUpperCase().split(' ')[0] as Page)} 
-                      className="hover:text-blue-400 transition-colors text-sm font-medium"
-                    >
-                      {item}
-                    </button>
-                  </li>
-                ))}
+                <li><button onClick={() => setCurrentPage(Page.ABOUT)} className="hover:text-blue-400 transition-colors text-sm">About Our History</button></li>
+                <li><button onClick={() => setCurrentPage(Page.ACADEMICS)} className="hover:text-blue-400 transition-colors text-sm">Our Faculty</button></li>
+                <li><button onClick={() => setCurrentPage(Page.ADMISSIONS)} className="hover:text-blue-400 transition-colors text-sm">Admission Inquiry</button></li>
+                <li><a href={DIGITAL_PORTAL_URL} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors text-sm flex items-center gap-1">Student Portal <ExternalLink size={14}/></a></li>
               </ul>
             </div>
              <div>
-              <h3 className="text-white font-bold mb-6 text-lg">Contact Us</h3>
+              <h3 className="text-white font-bold mb-6 text-lg">Contact Detail</h3>
               <div className="space-y-4 text-sm">
-                <p>123 Knowledge Way,<br/>New Delhi, India 110001</p>
-                <p className="text-blue-400 font-bold underline">info@bsdpublic.edu</p>
-                <p>+91 (011) 2345-6789</p>
+                <p>{SCHOOL_ADDRESS}</p>
+                <p className="text-blue-400 font-bold underline">{SCHOOL_EMAIL}</p>
+                <p>{SCHOOL_PHONE}</p>
               </div>
             </div>
           </div>
           <div className="border-t border-slate-800 dark:border-slate-900 mt-16 pt-8 text-center text-xs text-slate-600 tracking-widest uppercase font-bold">
-            &copy; {new Date().getFullYear()} BSD Public School. Crafted for Excellence.
+            &copy; {new Date().getFullYear()} {SCHOOL_NAME}. Empowering Excellence.
           </div>
         </div>
       </footer>
@@ -124,5 +116,10 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+// Simple ExternalLink icon helper for footer
+const ExternalLink = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+);
 
 export default App;

@@ -31,7 +31,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate, isDarkMode }) => {
               transition={{ delay: 0.2 }}
               className="inline-block px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-sm font-bold mb-6"
             >
-              Est. 1999 • Excellence in Education
+              Est. 2017 • Excellence in Education
             </motion.span>
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-8 tracking-tight leading-tight">
               Empowering Minds,<br/><span className="text-blue-600 dark:text-cyan-400">Shaping Futures</span>

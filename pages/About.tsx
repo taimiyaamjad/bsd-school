@@ -1,85 +1,75 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Award, Target, Users } from 'lucide-react';
 
 const About: React.FC = () => {
+  const leadership = [
+    { name: "Shashank Sir", role: "Principal", desc: "With over 20 years of experience in educational leadership, dedicated to academic excellence." },
+    { name: "Bobby Sir", role: "Vice Principal", desc: "Oversees student affairs and curriculum development for a supportive learning environment." },
+    { name: "Sabajeet Sir", role: "Director", desc: "Provides strategic direction and commitment to the school's founding values." }
+  ];
+
   return (
-    <div className="animate-fade-in pb-16">
-      {/* Hero */}
-      <div className="relative h-[300px] w-full overflow-hidden">
-        <img 
-            src="https://picsum.photos/1200/400?grayscale&blur=2" 
-            alt="School Building" 
-            className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-blue-900/60 dark:bg-slate-900/80 flex items-center justify-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white text-center">About BSD Public School</h1>
-        </div>
-      </div>
+    <div className="pb-16 pt-20">
+      <div className="container mx-auto px-4">
+        {/* Intro */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-4xl mx-auto text-center mb-16"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Our Legacy & Leadership</h1>
+          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+            BSD Public School has been a beacon of learning and community since 2017. Located in Guraini, Jaunpur, we are dedicated to providing a supportive and challenging environment where students thrive academically, creatively, and personally.
+          </p>
+        </motion.div>
 
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col md:flex-row gap-12 items-center mb-16">
-            <div className="md:w-1/2">
-                <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-200 mb-6">Principal's Message</h2>
-                <p className="text-gray-600 dark:text-slate-300 mb-4 leading-relaxed">
-                    "Welcome to BSD Public School. For over 25 years, we have dedicated ourselves to fostering an environment where curiosity thrives and potential is realized. Our mission goes beyond textbooks; we aim to mold compassionate, resilient, and forward-thinking individuals ready to lead in a complex world."
-                </p>
-                <p className="text-gray-600 dark:text-slate-300 leading-relaxed font-semibold">
-                    - Dr. Sarah Johnson, Principal
-                </p>
-            </div>
-            <div className="md:w-1/2">
-                <img src="https://picsum.photos/600/400?random=1" alt="Principal" className="rounded-2xl shadow-lg w-full object-cover" />
-            </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl border border-transparent dark:border-blue-800">
-                <h3 className="text-xl font-bold text-blue-900 dark:text-blue-300 mb-4">Our Vision</h3>
-                <p className="text-gray-700 dark:text-slate-300">
-                    To be a global leader in education, inspiring a passion for learning and empowering students to make a positive impact on society.
-                </p>
-            </div>
-            <div className="bg-orange-50 dark:bg-orange-900/20 p-8 rounded-2xl border border-transparent dark:border-orange-800">
-                <h3 className="text-xl font-bold text-orange-900 dark:text-orange-300 mb-4">Our Mission</h3>
-                <p className="text-gray-700 dark:text-slate-300">
-                    Provide a safe, inclusive, and technologically advanced learning environment that cultivates academic excellence, creativity, and moral integrity.
-                </p>
-            </div>
+        {/* Leadership Section */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {leadership.map((member, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-800 text-center"
+            >
+              <div className="w-24 h-24 bg-blue-100 dark:bg-blue-900/30 rounded-full mx-auto mb-6 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                <Users size={40} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{member.name}</h3>
+              <p className="text-blue-600 dark:text-cyan-400 font-medium mb-4">{member.role}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400">{member.desc}</p>
+            </motion.div>
+          ))}
         </div>
 
-        <div>
-            <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">Our History</h2>
-            <div className="relative border-l-2 border-blue-200 dark:border-slate-700 ml-4 md:ml-0 md:pl-0 space-y-12">
-                <div className="md:flex items-center">
-                    <div className="hidden md:block w-1/2 pr-8 text-right">
-                        <h4 className="text-xl font-bold text-blue-900 dark:text-blue-300">1999</h4>
-                        <p className="text-gray-600 dark:text-slate-400">Founded by the Educational Trust with 50 students.</p>
-                    </div>
-                    <div className="absolute left-[-9px] md:left-1/2 md:ml-[-9px] w-4 h-4 bg-blue-600 dark:bg-blue-500 rounded-full border-4 border-white dark:border-slate-900 shadow-sm"></div>
-                    <div className="md:w-1/2 pl-8 md:pl-8 block md:hidden">
-                        <h4 className="text-xl font-bold text-blue-900 dark:text-blue-300">1999</h4>
-                        <p className="text-gray-600 dark:text-slate-400">Founded by the Educational Trust with 50 students.</p>
-                    </div>
-                </div>
-                 <div className="md:flex items-center">
-                    <div className="md:w-1/2 pr-8 text-right hidden md:block"></div>
-                    <div className="absolute left-[-9px] md:left-1/2 md:ml-[-9px] w-4 h-4 bg-orange-500 rounded-full border-4 border-white dark:border-slate-900 shadow-sm"></div>
-                     <div className="md:w-1/2 pl-8">
-                        <h4 className="text-xl font-bold text-blue-900 dark:text-blue-300">2010</h4>
-                        <p className="text-gray-600 dark:text-slate-400">Expanded to Senior Secondary Wing with state-of-the-art Science Labs.</p>
-                    </div>
-                </div>
-                 <div className="md:flex items-center">
-                    <div className="hidden md:block w-1/2 pr-8 text-right">
-                        <h4 className="text-xl font-bold text-blue-900 dark:text-blue-300">2023</h4>
-                        <p className="text-gray-600 dark:text-slate-400">Received "Best Innovation in Education" Award. Student count crosses 1200.</p>
-                    </div>
-                    <div className="absolute left-[-9px] md:left-1/2 md:ml-[-9px] w-4 h-4 bg-blue-600 dark:bg-blue-500 rounded-full border-4 border-white dark:border-slate-900 shadow-sm"></div>
-                     <div className="md:w-1/2 pl-8 block md:hidden">
-                        <h4 className="text-xl font-bold text-blue-900 dark:text-blue-300">2023</h4>
-                        <p className="text-gray-600 dark:text-slate-400">Received "Best Innovation in Education" Award. Student count crosses 1200.</p>
-                    </div>
-                </div>
+        {/* History Timeline */}
+        <div className="bg-slate-100 dark:bg-slate-900/50 rounded-[3rem] p-10 md:p-16 mb-20">
+          <h2 className="text-3xl font-bold text-center mb-12 dark:text-white">Our Journey</h2>
+          <div className="space-y-12 max-w-3xl mx-auto">
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl shadow-md flex items-center justify-center font-bold text-blue-600">2017</div>
+              <div>
+                <h4 className="text-xl font-bold dark:text-white">Founding Year</h4>
+                <p className="text-slate-600 dark:text-slate-400 mt-2">BSD Public School was founded in Guraini, Jaunpur, starting as a community school with a mission for holistic development.</p>
+              </div>
             </div>
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl shadow-md flex items-center justify-center font-bold text-orange-500">2018</div>
+              <div>
+                <h4 className="text-xl font-bold dark:text-white">CBSE Affiliation</h4>
+                <p className="text-slate-600 dark:text-slate-400 mt-2">A major milestone as we became affiliated with CBSE, embracing modern teaching methodologies.</p>
+              </div>
+            </div>
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl shadow-md flex items-center justify-center font-bold text-cyan-500">Present</div>
+              <div>
+                <h4 className="text-xl font-bold dark:text-white">Legacy of Excellence</h4>
+                <p className="text-slate-600 dark:text-slate-400 mt-2">Today, we are a leading institution in the region, proud of our thousands of successful alumni.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
