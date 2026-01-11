@@ -13,12 +13,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.HOME);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setIsDarkMode(prefersDark);
-    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const App: React.FC = () => {
     }
   };
 
-  if (!isLoaded) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />;
+  if (!isMounted) return null;
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans flex flex-col selection:bg-blue-200 dark:selection:bg-blue-800 transition-colors duration-500">
@@ -59,21 +59,21 @@ const App: React.FC = () => {
         toggleTheme={toggleTheme}
       />
       
-      <main className="flex-grow relative overflow-x-hidden">
+      <main className="flex-grow relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -10 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
           >
             {renderPage()}
           </motion.div>
         </AnimatePresence>
       </main>
 
-      <footer className="bg-slate-900 dark:bg-slate-950 text-slate-400 py-16 border-t border-slate-800 dark:border-slate-900 relative z-20">
+      <footer className="bg-slate-900 dark:bg-slate-950 text-slate-400 py-16 border-t border-slate-800 dark:border-slate-900">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-12">
             <div className="col-span-1 md:col-span-2">
@@ -94,7 +94,6 @@ const App: React.FC = () => {
                 <li><button onClick={() => setCurrentPage(Page.ABOUT)} className="hover:text-blue-400 transition-colors text-sm">About Our History</button></li>
                 <li><button onClick={() => setCurrentPage(Page.ACADEMICS)} className="hover:text-blue-400 transition-colors text-sm">Our Faculty</button></li>
                 <li><button onClick={() => setCurrentPage(Page.ADMISSIONS)} className="hover:text-blue-400 transition-colors text-sm">Admission Inquiry</button></li>
-                <li><a href={DIGITAL_PORTAL_URL} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors text-sm flex items-center gap-1">Student Portal <ExternalLink size={14}/></a></li>
               </ul>
             </div>
              <div>
@@ -116,10 +115,5 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-// Simple ExternalLink icon helper for footer
-const ExternalLink = ({ size }: { size: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-);
 
 export default App;
