@@ -3,8 +3,8 @@ import { NavItem, Page, SchoolStat } from './types';
 export const SCHOOL_NAME = "BSD Public School";
 export const SCHOOL_LOGO_URL = "https://bsdpublic.wordpress.com/wp-content/uploads/2024/12/cropped-1000001464-removebg-preview-1.png";
 export const SCHOOL_ADDRESS = "Guraini, Jaunpur, Uttar Pradesh, India";
-export const SCHOOL_PHONE = "+91 9450XXXXXX"; // Placeholder for actual school number
-export const SCHOOL_EMAIL = "info@bsdpublicschool.edu";
+export const SCHOOL_PHONE = "+91 7080672744";
+export const SCHOOL_EMAIL = "educationbsd@gmail.com";
 export const DIGITAL_PORTAL_URL = "https://bsd-digital-portal.vercel.app/";
 
 export const NAV_ITEMS: NavItem[] = [
@@ -29,6 +29,8 @@ Key Information:
 - Founded: 2017
 - Location: Guraini, Jaunpur.
 - Affiliation: CBSE (since 2018).
+- Contact Phone: ${SCHOOL_PHONE}
+- Contact Email: ${SCHOOL_EMAIL}
 - Leadership: Shashank Sir (Principal), Bobby Sir (Vice Principal), Sabajeet Sir (Director).
 - Notable Faculty: Mr. Ramakant Prajapati (Math), Mr. Bobby Sir (Science), Mr. Amit Sir (English), Mr. Deepak Sir (Social Studies), Mr. Abbaas Sir (Computer Science), Ms. Preeti Mam (Hindi).
 - Philosophy: Providing a supportive and challenging environment for academic and personal growth.
