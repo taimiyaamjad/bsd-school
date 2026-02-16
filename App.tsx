@@ -6,6 +6,7 @@ import Academics from './pages/Academics';
 import Admissions from './pages/Admissions';
 import Contact from './pages/Contact';
 import StaffLogin from './pages/StaffLogin';
+import Gallery from './pages/Gallery';
 import ChatBot from './components/ChatBot';
 import { Page } from './types';
 import { SCHOOL_NAME, DIGITAL_PORTAL_URL, SCHOOL_ADDRESS, SCHOOL_EMAIL, SCHOOL_PHONE } from './constants';
@@ -42,6 +43,8 @@ const App: React.FC = () => {
         return <Academics />;
       case Page.ADMISSIONS:
         return <Admissions />;
+      case Page.GALLERY:
+        return <Gallery />;
       case Page.CONTACT:
         return <Contact />;
       case Page.STAFF_LOGIN:
@@ -95,7 +98,7 @@ const App: React.FC = () => {
               <h3 className="text-white font-bold mb-6 text-lg">Quick Access</h3>
               <ul className="space-y-4">
                 <li><button onClick={() => setCurrentPage(Page.ABOUT)} className="hover:text-blue-400 transition-colors text-sm">About Our History</button></li>
-                <li><button onClick={() => setCurrentPage(Page.ACADEMICS)} className="hover:text-blue-400 transition-colors text-sm">Our Faculty</button></li>
+                <li><button onClick={() => setCurrentPage(Page.GALLERY)} className="hover:text-blue-400 transition-colors text-sm">School Gallery</button></li>
                 <li><button onClick={() => setCurrentPage(Page.ADMISSIONS)} className="hover:text-blue-400 transition-colors text-sm">Admission Inquiry</button></li>
                 <li><button onClick={() => setCurrentPage(Page.STAFF_LOGIN)} className="hover:text-blue-400 transition-colors text-sm font-bold">Staff Access</button></li>
               </ul>

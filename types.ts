@@ -4,7 +4,8 @@ export enum Page {
   ACADEMICS = 'ACADEMICS',
   ADMISSIONS = 'ADMISSIONS',
   CONTACT = 'CONTACT',
-  STAFF_LOGIN = 'STAFF_LOGIN'
+  STAFF_LOGIN = 'STAFF_LOGIN',
+  GALLERY = 'GALLERY'
 }
 
 export interface NavItem {

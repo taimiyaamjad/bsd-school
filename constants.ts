@@ -12,6 +12,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'About Us', page: Page.ABOUT },
   { label: 'Academics', page: Page.ACADEMICS },
   { label: 'Admissions', page: Page.ADMISSIONS },
+  { label: 'Gallery', page: Page.GALLERY },
   { label: 'Contact', page: Page.CONTACT },
   { label: 'Staff Login', page: Page.STAFF_LOGIN },
   { label: 'Digital Portal', page: 'PORTAL' as any },
