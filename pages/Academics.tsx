@@ -12,77 +12,115 @@ const Academics: React.FC = () => {
     { name: "Ms. Preeti Mam", sub: "Hindi", qual: "M.A. in Hindi", icon: <BookOpen /> }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: 20 },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+  };
+
   return (
-    <div className="pb-16 pt-20">
+    <div className="pb-16 pt-24">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">Academic Excellence</h1>
-          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
+            Academic <span className="text-blue-600">Excellence</span>
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
             Our curriculum, affiliated with CBSE, balances rigorous academics with practical innovation and creative exploration.
           </p>
         </motion.div>
 
         {/* Faculty Grid */}
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-10 text-center">Our Esteemed Faculty</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {faculty.map((teacher, i) => (
-            <motion.div 
-              key={i}
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-800 flex items-center gap-5"
-            >
-              <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center">
-                {teacher.icon}
-              </div>
-              <div>
-                <h4 className="font-bold text-slate-900 dark:text-white">{teacher.name}</h4>
-                <p className="text-blue-600 dark:text-cyan-400 text-sm font-medium">{teacher.sub}</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{teacher.qual}</p>
-              </div>
-            </motion.div>
-          ))}
+        <div className="mb-24">
+          <motion.h2 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-2xl md:text-3xl font-black text-slate-400 dark:text-slate-600 mb-12 text-center uppercase tracking-[0.3em]"
+          >
+            Our Esteemed Faculty
+          </motion.h2>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {faculty.map((teacher, i) => (
+              <motion.div 
+                key={i}
+                variants={cardVariants}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] shadow-xl border border-slate-100 dark:border-slate-800 flex items-center gap-6 group hover:border-blue-500/50 transition-colors"
+              >
+                <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  {teacher.icon}
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">{teacher.name}</h4>
+                  <p className="text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest mt-1">{teacher.sub}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-500 mt-2 font-medium">{teacher.qual}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
 
         {/* Curriculum Sections */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-orange-50 dark:bg-orange-900/10 p-10 rounded-[2.5rem]">
-            <h3 className="text-2xl font-bold text-orange-900 dark:text-orange-300 mb-4">Core Focus</h3>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                CBSE Standardized Curriculum
-              </li>
-              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                Science & Mathematics Specialization
-              </li>
-              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                Advanced Computer Applications
-              </li>
+        <div className="grid md:grid-cols-2 gap-10">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-orange-50 dark:bg-orange-900/10 p-12 rounded-[3.5rem] border border-orange-100 dark:border-orange-900/20"
+          >
+            <h3 className="text-3xl font-bold text-orange-900 dark:text-orange-300 mb-8 tracking-tight">Core Foundation</h3>
+            <ul className="space-y-6">
+              {[
+                "CBSE Standardized Curriculum",
+                "Science & Mathematics Specialization",
+                "Advanced Computer Applications",
+                "Practical Laboratory Learning"
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-center gap-4 text-slate-700 dark:text-slate-300 font-medium">
+                  <div className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-lg shadow-orange-500/50" />
+                  {item}
+                </li>
+              ))}
             </ul>
-          </div>
-          <div className="bg-blue-50 dark:bg-blue-900/10 p-10 rounded-[2.5rem]">
-            <h3 className="text-2xl font-bold text-blue-900 dark:text-blue-300 mb-4">Beyond Textbooks</h3>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                English & Hindi Literacy Excellence
-              </li>
-              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                Interactive Social Studies Projects
-              </li>
-              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                Physical Education & Discipline
-              </li>
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-blue-50 dark:bg-blue-900/10 p-12 rounded-[3.5rem] border border-blue-100 dark:border-blue-900/20"
+          >
+            <h3 className="text-3xl font-bold text-blue-900 dark:text-blue-300 mb-8 tracking-tight">Beyond Textbooks</h3>
+            <ul className="space-y-6">
+              {[
+                "English & Hindi Literacy Excellence",
+                "Interactive Social Studies Projects",
+                "Physical Education & Leadership",
+                "Artistic & Creative Development"
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-center gap-4 text-slate-700 dark:text-slate-300 font-medium">
+                  <div className="w-2.5 h-2.5 bg-blue-500 rounded-full shadow-lg shadow-blue-500/50" />
+                  {item}
+                </li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

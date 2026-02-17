@@ -20,7 +20,7 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const SCHOOL_STATS: SchoolStat[] = [
   { label: 'Students', value: '800+', icon: 'users' },
-  { label: 'Faculty', value: '40+', icon: 'graduation-cap' },
+  { label: 'Faculty', value: '12+', icon: 'graduation-cap' },
   { label: 'Years of Excellence', value: '7+', icon: 'award' },
   { label: 'Sports Facilities', value: '10+', icon: 'trophy' },
 ];
@@ -33,7 +33,7 @@ Key Information:
 - Contact Phone: ${SCHOOL_PHONE}
 - Contact Email: ${SCHOOL_EMAIL}
 - Leadership: Shashank Sir (Principal), Bobby Sir (Vice Principal), Sabajeet Sir (Director).
-- Notable Faculty: Mr. Ramakant Prajapati (Math), Mr. Bobby Sir (Science), Mr. Amit Sir (English), Mr. Deepak Sir (Social Studies), Mr. Abbaas Sir (Computer Science), Ms. Preeti Mam (Hindi).
+- Notable Faculty: Mr. Ramakant Prajapati (Math), Mr. Bobby Sir (Science), Mr. Amit Sir (English), Mr. Deepak Sir (Social Studies), Mr. Abbaas Sir (Computer Science), Ms. Preeti Mam (Hindi). Total faculty count is 12+.
 - Philosophy: Providing a supportive and challenging environment for academic and personal growth.
 - Admissions: Open for the new academic session.
 - Digital Portal: Accessible at https://bsd-digital-portal.vercel.app/ for students and staff.
