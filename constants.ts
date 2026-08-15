@@ -1,7 +1,7 @@
 import { NavItem, Page, SchoolStat } from './types';
 
 export const SCHOOL_NAME = "BSD Public School";
-export const SCHOOL_LOGO_URL = "https://bsdpublic.wordpress.com/wp-content/uploads/2024/12/cropped-1000001464-removebg-preview-1.png";
+export const SCHOOL_LOGO_URL = "https://i.ibb.co/NMthQdw/download-Photoroom.png";
 export const SCHOOL_ADDRESS = "Guraini, Jaunpur, Uttar Pradesh, India";
 export const SCHOOL_PHONE = "+91 7080672744";
 export const SCHOOL_EMAIL = "educationbsd@gmail.com";

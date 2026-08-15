@@ -1,8 +1,4 @@
 import React from 'react';
-import { Sun, Moon, ExternalLink } from 'lucide-react';
-import { NAV_ITEMS, SCHOOL_NAME, SCHOOL_LOGO_URL, DIGITAL_PORTAL_URL } from '../constants';
-import { Page } from '../types';
-import { NavBar, NavItem as TubelightNavItem } from './ui/tubelight-navbar';
 import { 
   Home, 
   Info, 
@@ -10,8 +6,14 @@ import {
   UserPlus, 
   Images, 
   PhoneCall, 
-  Lock 
+  Lock,
+  Sun, 
+  Moon, 
+  ExternalLink 
 } from 'lucide-react';
+import { SCHOOL_NAME, SCHOOL_LOGO_URL, DIGITAL_PORTAL_URL } from '../constants';
+import { Page } from '../types';
+import { NavBar, NavItem as TubelightNavItem } from './ui/tubelight-navbar';
 
 interface NavigationProps {
   currentPage: Page;
@@ -110,24 +112,17 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate, isDark
               <span className="font-bold text-xl text-blue-900 dark:text-white tracking-tight transition-colors">{SCHOOL_NAME}</span>
             </div>
 
-            {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center space-x-5">
-              {NAV_ITEMS.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => handleNavClick(item.page as any)}
-                  className={`text-sm font-medium transition-colors duration-200 flex items-center gap-1 ${
-                    currentPage === item.page
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-gray-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white'
-                  } ${item.label === 'Digital Portal' ? 'text-blue-700 dark:text-blue-300 font-bold bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full' : ''}`}
-                >
-                  {item.label}
-                  {item.label === 'Digital Portal' && <ExternalLink size={14} />}
-                </button>
-              ))}
-              
-              <div className="h-6 w-px bg-gray-200 dark:bg-slate-700 mx-1" />
+            {/* Right Action Controls (Clean header for all screen sizes) */}
+            <div className="flex items-center gap-3">
+              <a
+                href={DIGITAL_PORTAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40 px-3.5 py-1.5 rounded-full transition-all flex items-center gap-1.5"
+              >
+                <span>Portal</span>
+                <ExternalLink size={14} />
+              </a>
 
               <button
                 onClick={toggleTheme}
@@ -139,25 +134,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate, isDark
 
               <button 
                 onClick={() => handleNavClick(Page.ADMISSIONS)}
-                className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-5 py-2 rounded-full transition-all shadow-md hover:shadow-lg active:scale-95"
-              >
-                Apply Now
-              </button>
-            </div>
-
-            {/* Mobile Controls (No three lines / hamburger menu button) */}
-            <div className="md:hidden flex items-center gap-3">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
-                aria-label="Toggle Theme"
-              >
-                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-
-              <button 
-                onClick={() => handleNavClick(Page.ADMISSIONS)}
-                className="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold px-4 py-2 rounded-full transition-all shadow-md active:scale-95"
+                className="bg-orange-500 hover:bg-orange-600 text-white text-xs sm:text-sm font-bold px-4 sm:px-5 py-2 rounded-full transition-all shadow-md hover:shadow-lg active:scale-95"
               >
                 Apply Now
               </button>
