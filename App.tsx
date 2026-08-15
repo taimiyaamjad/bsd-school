@@ -7,7 +7,6 @@ import Admissions from './pages/Admissions';
 import Contact from './pages/Contact';
 import StaffLogin from './pages/StaffLogin';
 import Gallery from './pages/Gallery';
-import ChatBot from './components/ChatBot';
 import { Page } from './types';
 import { SCHOOL_NAME, DIGITAL_PORTAL_URL, SCHOOL_ADDRESS, SCHOOL_EMAIL, SCHOOL_PHONE } from './constants';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -65,7 +64,7 @@ const App: React.FC = () => {
         toggleTheme={toggleTheme}
       />
       
-      <main className="flex-grow relative">
+      <main className="flex-grow relative pb-28">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
@@ -117,8 +116,6 @@ const App: React.FC = () => {
           </div>
         </div>
       </footer>
-
-      <ChatBot />
     </div>
   );
 };
